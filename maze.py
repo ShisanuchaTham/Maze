@@ -1,7 +1,6 @@
 import os
 import keyboard
 import time
-
 class maze:
     def __init__(self) -> None:
         self.maze = [
