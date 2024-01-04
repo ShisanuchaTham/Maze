@@ -1,6 +1,7 @@
 import os
 import keyboard
 import time
+import stack 
 class maze:
     def __init__(self) -> None:
         self.maze = [
