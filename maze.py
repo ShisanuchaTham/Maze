@@ -1,7 +1,7 @@
 import os
 import keyboard
 import time
-import stack 
+import stack as stk
 class maze:
     def __init__(self) -> None:
         self.maze = [
@@ -104,7 +104,17 @@ if __name__ == '__main__':
 
     m = maze()
     m.print()
+    x = stk.Stack()
 
+    old_x = m.ply.x 
+    old_y = m.ply.y
+    # if old_x == m.ply.x and old_y == m.ply.y:
+    #     print('it not move') 
+    # else:
+    #     print('it move')  
     while True:
-        
-        break
+        if x.peek == None:
+            m.move_up()
+            m.print()
+            x.push(1)
+
