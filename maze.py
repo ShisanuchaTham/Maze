@@ -8,8 +8,8 @@ class maze:
                     ["X", "X", "X", "X", "X", "X", "X"],
                     ["X", " ", " ", " ", "X", " ", "X"],
                     ["X", " ", "X", " ", "X", " ", " "],
-                    ["X", " ", "X", " ", "X", " ", "X"],
                     ["X", " ", "X", " ", " ", " ", "X"],
+                    ["X", " ", "X", " ", "X", " ", "X"],
                     ["X", " ", "X", "X", "X", "X", "X"],
                     ]
         self.ply = pos(5, 1)
@@ -106,26 +106,5 @@ if __name__ == '__main__':
     m.print()
 
     while True:
-        if keyboard.is_pressed("q"):
-            print("Quit Program")
-            break
-        if keyboard.is_pressed("w"):
-            if m.move_up():
-                m.print()
-            else:
-                break
-        if keyboard.is_pressed("s"):
-            if m.move_down():
-                m.print()
-            else:
-                break
-        if keyboard.is_pressed("a"):
-            if m.move_left():
-                m.print()
-            else:
-                break
-        if keyboard.is_pressed("d"):
-            if m.move_right():
-                m.print()
-            else:
-                break
+        
+        break
