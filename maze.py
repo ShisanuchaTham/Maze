@@ -108,13 +108,57 @@ if __name__ == '__main__':
 
     old_x = m.ply.x 
     old_y = m.ply.y
-    # if old_x == m.ply.x and old_y == m.ply.y:
-    #     print('it not move') 
-    # else:
-    #     print('it move')  
+
     while True:
-        if x.peek == None:
-            m.move_up()
-            m.print()
-            x.push(1)
+        if x._top == None:
+                if m.move_up():
+                    m.print()
+                    x.push(1)
+                else:
+                    break
+        if x._top.item == 1 or x._top.item == 5:
+                if m.move_up():
+                    m.print()
+                    print(x._top.item)
+                    x.push(1)
+                else:
+                    break
+        if x._top.item == 2:
+                if m.move_left():
+                    m.print()
+                    x.push(2)
+                    print(x._top.item)
+                else:
+                    break
+        if x._top.item == 3:
+                if m.move_right():
+                    m.print()
+                    print(x._top.item)
+                    x.push(3)
+                else:
+                    break
+        if x._top.item == 4:
+                if m.move_down():
+                    m.print()
+                    x.push(4)
+                    print(x._top.item)
+                else:
+                    break
+        if (old_x == m.ply.x and old_y == m.ply.y) :
+            if x._top.item == 4:
+                x.pop()
+                x.push(5)
+            elif x._top.item == 3:
+                x.pop()
+                x.push(4)
+            elif x._top.item == 2:
+                x.pop()
+                x.push(3)
+            elif x._top.item == 1:
+                x.pop()
+                x.push(2)
+        
+        old_x = m.ply.x 
+        old_y = m.ply.y
+
 

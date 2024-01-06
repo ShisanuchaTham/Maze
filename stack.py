@@ -32,13 +32,12 @@ class _StackNode:
 
 if __name__ == '__main__':
     x = Stack()
-    if x.peek == None:
-        print('None')
-    else:
-        print(x._top)
-    x.push(1)    
-    if x.peek == None:
-        print('None')
-    else:
-        print(x._top.item)
+    x.pop()
+    x.push(1)
+    if x.peek == 1:
+        print("T1")
+    if x._top == 1:
+        print("T2")
+    if x._top.item == 1:
+        print("T3")
     
