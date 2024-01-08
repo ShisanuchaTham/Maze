@@ -5,10 +5,10 @@ class maze:
     def __init__(self) -> None:
         self.maze = [
                     ["X", "X", "X", "X", "X", "X", "X"],
-                    ["X", " ", " ", " ", "X", "X", "X"],
+                    ["X", " ", " ", " ", "X", " ", "X"],
                     ["X", " ", "X", " ", "X", " ", " "],
                     ["X", " ", "X", " ", " ", " ", "X"],
-                    ["X", " ", "X", " ", "X", " ", "X"],
+                    [" ", " ", "X", " ", "X", " ", "X"],
                     ["X", " ", "X", "X", "X", "X", "X"],
                     ]
         self.ply = pos(5, 1)
@@ -92,23 +92,56 @@ class maze:
     
     def checkWay(self):
         posnow = pos(self.ply.y, self.ply.x)
-        up_move = self.maze[posnow.y-1][posnow.x]
-        down_move = self.maze[posnow.y+1][posnow.x]
-        lelf_move = self.maze[posnow.y][posnow.x-1]
-        right_move = self.maze[posnow.y][posnow.x+1]
-        if self.isInBound(up_move.y,up_move.x):
-            if up_move == " " or "E":
+
+        if self.isInBound(posnow.y-1,posnow.x):
+            if self.maze[posnow.y-1][posnow.x] == " " :
                 up = True
-        if self.isInBound(down_move.y,down_move.x):
-            if down_move == " " or "E":
-                down = True
-        if self.isInBound(lelf_move.y,lelf_move.x):
-            if lelf_move == " " or "E":
+            elif self.maze[posnow.y-1][posnow.x] == "E":
+                up = True
+            elif self.maze[posnow.y-1][posnow.x] == "X":
+                up = False
+            else:
+                up = False
+        else:
+            up = False
+
+        if self.isInBound(posnow.y+1,posnow.x):
+            if self.maze[posnow.y+1][posnow.x] == " " :
+                low = True
+            elif self.maze[posnow.y+1][posnow.x] == "E":
+                low = True
+            elif self.maze[posnow.y+1][posnow.x] == "X":
+                low = False
+            else:
+                low = False
+        else:
+            low = False
+
+        if self.isInBound(posnow.y,posnow.x-1):
+            if self.maze[posnow.y][posnow.x-1] == " " :
                 lelf = True
-        if self.isInBound(right_move.y,right_move.x):
-            if right_move == " " or "E":
+            elif self.maze[posnow.y][posnow.x-1] == "E":
+                lelf = True
+            elif self.maze[posnow.y][posnow.x-1] == "X":
+                lelf = False
+            else:
+                lelf = False
+        else:
+            lelf = False
+
+        if self.isInBound(posnow.y,posnow.x+1):
+            if self.maze[posnow.y][posnow.x+1] == " " :
                 right = True
-        a = waycan(up,down,lelf,right)
+            elif self.maze[posnow.y][posnow.x+1] == "E":
+                right = True
+            elif self.maze[posnow.y][posnow.x+1] == "X":
+                right = False
+            else:
+                right = False
+        else:
+            right = False
+
+        a = waycan(up,low,lelf,right)
         return a
 
 class pos:
@@ -121,12 +154,7 @@ class pos:
         self.x = x
 
 class waycan:
-    def __init__(self) -> None:
-        self.up = None
-        self.down = None
-        self.right = None
-        self.left = None
-    
+
     def __init__(self, u, d, r, l) -> None:
         self.up = u
         self.down = d
@@ -139,37 +167,47 @@ if __name__ == '__main__':
 
     m = maze()
     m.print()
-
+    a = m.checkWay()
+    print(a.up,a.down,a.left,a.right)
 
     old_x = m.ply.x 
     old_y = m.ply.y
 
     # if (old_x == m.ply.x and old_y == m.ply.y) :
-        
 
+    
 
     while True:
-        # if keyboard.is_pressed("q"):
-        #     print("Quit Program")
-        #     break
-        # if keyboard.is_pressed("w"):
-        #     if m.move_up():
-        #         m.print()
-        #     else:
-        #         break
-        # if keyboard.is_pressed("s"):
-        #     if m.move_down():
-        #         m.print()
-        #     else:
-        #         break
-        # if keyboard.is_pressed("a"):
-        #     if m.move_left():
-        #         m.print()
-        #     else:
-        #         break
-        # if keyboard.is_pressed("d"):
-        #     if m.move_right():
-        #         m.print()
-        #     else:
-        #         break
-        break
+        
+        if keyboard.is_pressed("q"):
+            print("Quit Program")
+            break
+        if keyboard.is_pressed("w"):
+            if m.move_up():
+                m.print()
+                a = m.checkWay()
+                print(a.up,a.down,a.left,a.right)  
+            else:
+                break
+        if keyboard.is_pressed("s"):
+            if m.move_down():
+                m.print()
+                a = m.checkWay()
+                print(a.up,a.down,a.left,a.right)  
+            else:
+                break
+        if keyboard.is_pressed("a"):
+            if m.move_left():
+                m.print()
+                a = m.checkWay()
+                print(a.up,a.down,a.left,a.right)  
+            else:
+                break
+        if keyboard.is_pressed("d"):
+            if m.move_right():
+                m.print()
+                a = m.checkWay()
+                print(a.up,a.down,a.left,a.right)  
+            else:
+                break
+        # break
