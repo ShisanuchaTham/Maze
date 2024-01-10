@@ -9,10 +9,10 @@ class maze:
                     ["X", " ", " ", " ", "X", " ", "X"],
                     ["X", " ", "X", "X", "X", " ", " "],
                     ["X", " ", "X", " ", "X", " ", "X"],
-                    ["X", " ", "X", " ", " ", " ", "X"],
+                    ["X", " ", " ", " ", " ", " ", "X"],
                     ["X", " ", "X", "X", "X", "X", "X"],
                     ]
-        self.ply = pos(5, 2)
+        self.ply = pos(5, 1)
         self.end = pos(2, 6)
         self.maze[self.ply.y][self.ply.x] = "P"
         self.maze[self.end.y][self.end.x] = "E"
@@ -43,7 +43,7 @@ class maze:
         next_move = pos(self.ply.y-1, self.ply.x)
         if self.isInBound(next_move.y,next_move.x):
             if self.maze[next_move.y][next_move.x] == " ":
-                self.maze[self.ply.y][self.ply.x] = "1"
+                self.maze[self.ply.y][self.ply.x] = " "
                 self.maze[next_move.y][next_move.x] = "P"
                 self.ply = next_move
                 time.sleep(0.25)
@@ -56,7 +56,7 @@ class maze:
         next_move = pos(self.ply.y+1, self.ply.x)
         if self.isInBound(next_move.y,next_move.x):
             if self.maze[next_move.y][next_move.x] == " ":
-                self.maze[self.ply.y][self.ply.x] = "1"
+                self.maze[self.ply.y][self.ply.x] = " "
                 self.maze[next_move.y][next_move.x] = "P"
                 self.ply = next_move
                 time.sleep(0.25)
@@ -69,7 +69,7 @@ class maze:
         next_move = pos(self.ply.y, self.ply.x-1)
         if self.isInBound(next_move.y,next_move.x):
             if self.maze[next_move.y][next_move.x] == " ":
-                self.maze[self.ply.y][self.ply.x] = "1"
+                self.maze[self.ply.y][self.ply.x] = " "
                 self.maze[next_move.y][next_move.x] = "P"
                 self.ply = next_move
                 time.sleep(0.25)
@@ -82,7 +82,7 @@ class maze:
         next_move = pos(self.ply.y, self.ply.x+1)
         if self.isInBound(next_move.y,next_move.x):
             if self.maze[next_move.y][next_move.x] == " ":
-                self.maze[self.ply.y][self.ply.x] = "1"
+                self.maze[self.ply.y][self.ply.x] = " "
                 self.maze[next_move.y][next_move.x] = "P"
                 self.ply = next_move
                 time.sleep(0.25)
@@ -95,67 +95,51 @@ class maze:
         posnow = pos(self.ply.y, self.ply.x)
         if self.isInBound(posnow.y-1,posnow.x):
             if self.maze[posnow.y-1][posnow.x] == " " :
-                up = True
+                up = 1
             elif self.maze[posnow.y-1][posnow.x] == "E":
-                up = True
+                up = 1
             elif self.maze[posnow.y-1][posnow.x] == "X":
-                up = False
+                up = 0
             else:
-                up = False
+                up = 0
         else:
-            up = False
+            up = 0
         if self.isInBound(posnow.y+1,posnow.x):
             if self.maze[posnow.y+1][posnow.x] == " " :
-                low = True
+                low = 1
             elif self.maze[posnow.y+1][posnow.x] == "E":
-                low = True
+                low = 1
             elif self.maze[posnow.y+1][posnow.x] == "X":
-                low = False
+                low = 0
             else:
-                low = False
+                low = 0
         else:
-            low = False
+            low = 0
         if self.isInBound(posnow.y,posnow.x-1):
             if self.maze[posnow.y][posnow.x-1] == " " :
-                lelf = True
+                lelf = 1
             elif self.maze[posnow.y][posnow.x-1] == "E":
-                lelf = True
+                lelf = 1
             elif self.maze[posnow.y][posnow.x-1] == "X":
-                lelf = False
+                lelf = 0
             else:
-                lelf = False
+                lelf = 0
         else:
-            lelf = False
+            lelf = 0
         if self.isInBound(posnow.y,posnow.x+1):
             if self.maze[posnow.y][posnow.x+1] == " " :
-                right = True
+                right = 1
             elif self.maze[posnow.y][posnow.x+1] == "E":
-                right = True
+                right = 1
             elif self.maze[posnow.y][posnow.x+1] == "X":
-                right = False
+                right = 0
             else:
-                right = False
+                right = 0
         else:
-            right = False
+            right = 0
         a = waycan(up,low,lelf,right)
         return a
 
-    def clearwar(self):
-        posnow = pos(self.ply.y, self.ply.x)
-        part = self.checkWay()
-        if not(part.up or part.down or part.left or part.right):
-            if self.isInBound(posnow.y-1,posnow.x):
-                if self.maze[posnow.y-1][posnow.x] == "1" :
-                    self.maze[posnow.y-1][posnow.x] = " "
-            if self.isInBound(posnow.y+1,posnow.x):
-                if self.maze[posnow.y+1][posnow.x] == "1" :
-                    self.maze[posnow.y+1][posnow.x] = " "
-            if self.isInBound(posnow.y,posnow.x-1):
-                if self.maze[posnow.y][posnow.x-1] == "1" :
-                    self.maze[posnow.y][posnow.x-1] = " "
-            if self.isInBound(posnow.y,posnow.x+1):
-                if self.maze[posnow.y][posnow.x+1] == "1" :
-                    self.maze[posnow.y][posnow.x+1] = " "
 
 
 class pos:
@@ -174,6 +158,10 @@ class waycan:
         self.down = d
         self.right = r
         self.left = l
+    
+    def sumway(self):
+        sumW = self.up+self.down+self.right+self.left
+        return sumW
 
 
 
@@ -181,68 +169,80 @@ if __name__ == '__main__':
 
     m = maze()
     m.print()
-    a = m.checkWay()
-    print(a.up,a.down,a.left,a.right)
 
-    old_x = m.ply.x 
-    old_y = m.ply.y
-
-    # if (old_x == m.ply.x and old_y == m.ply.y) :
+    posit = pos(m.ply.x,m.ply.y)
+    state = False
     
     x = stk.Stack()
 
     while True:
 
-        if x._top == None:
+        if x.peek() == None:
                 if m.move_up():
                     m.print()
                     x.push(1)
-                else:
-                    break
-        if x._top.item == 1 or x._top.item == 5:
-                if m.move_up():
-                    m.print()
-                    print(x._top.item)
                     x.push(1)
                 else:
                     break
-        if x._top.item == 2:
+        
+        if x.peek() == 1:
+                if m.move_up():
+                    m.print()
+                else:
+                    break
+        if x.peek() == 2:
                 if m.move_left():
                     m.print()
-                    x.push(2)
-                    print(x._top.item)
                 else:
                     break
-        if x._top.item == 3:
-                if m.move_right():
-                    m.print()
-                    print(x._top.item)
-                    x.push(3)
-                else:
-                    break
-        if x._top.item == 4:
+        if x.peek() == 3:
                 if m.move_down():
                     m.print()
-                    x.push(4)
-                    print(x._top.item)
+                else:
+                    break
+        if x.peek() == 4:
+                if m.move_right():
+                    m.print()
                 else:
                     break
 
-        if (old_x == m.ply.x and old_y == m.ply.y) :
-            if x._top.item == 4:
+        if (posit.x == m.ply.x and posit.y == m.ply.y) :
+
+            if x.peek() == 4:
                 x.pop()
-                x.push(5)
-            elif x._top.item == 3:
+                x.push(1)
+            elif x.peek() == 3:
                 x.pop()
                 x.push(4)
-            elif x._top.item == 2:
+            elif x.peek() == 2:
                 x.pop()
-                x.push(3)
-            elif x._top.item == 1:
+                if x.peek() != 1:
+                    x.push(3)
+                else:
+                    x.push(4)
+            elif x.peek() == 1:
                 x.pop()
                 x.push(2)
-            m.clearwar()
+            state = True
 
-        old_x = m.ply.x 
-        old_y = m.ply.y
+        else:
+            if state:
+                rng = m.checkWay().sumway()
+                if rng == 1:
+                    m.maze[posit.y][posit.x] = "*"
+
+                second = x._top.item
+                first = x._top.next
+                x.pop()
+                x.pop()
+                x.push(first)
+                x.push(second)
+            
+            state = False
+            posit.x = m.ply.x
+            posit.y = m.ply.y
+
+
+        print(x.peek())
+        time.sleep(0.2)
         # break

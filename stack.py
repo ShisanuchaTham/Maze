@@ -42,5 +42,6 @@ if __name__ == '__main__':
     #     print("T2")
     # if x._top.item == 1:
     #     print("T3")
-    a = x._top.next.item
-    print(a)
+    a = x.__len__()
+    b= x._top.item
+    print(a,b)
