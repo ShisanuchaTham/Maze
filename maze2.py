@@ -169,15 +169,14 @@ if __name__ == '__main__':
 
     m = maze()
     m.print()
-
     posit = pos(m.ply.x,m.ply.y)
-    state = False
-    
+    Bool = True
+    state = False    
     x = stk.Stack()
 
     while True:
 
-        if x.peek() == None:
+        if x._top == None:
                 if m.move_up():
                     m.print()
                     x.push(1)
@@ -210,39 +209,45 @@ if __name__ == '__main__':
 
             if x.peek() == 4:
                 x.pop()
-                x.push(1)
+                if Bool:
+                    x.push(3)
+                    Bool = False
+                else:
+                    x.push(1)
             elif x.peek() == 3:
                 x.pop()
-                x.push(4)
-            elif x.peek() == 2:
-                x.pop()
-                if x.peek() != 1:
-                    x.push(3)
+                if Bool:
+                    x.push(2)
+                    Bool = False
                 else:
                     x.push(4)
+            elif x.peek() == 2:
+                x.pop()
+                if Bool:
+                    x.push(1)
+                    Bool = False
+                else:
+                    x.push(3)
             elif x.peek() == 1:
                 x.pop()
-                x.push(2)
+                if Bool:
+                    x.push(4)
+                    Bool = False
+                else:
+                    x.push(2)
+            rng = m.checkWay().sumway()
             state = True
 
         else:
             if state:
-                rng = m.checkWay().sumway()
                 if rng == 1:
                     m.maze[posit.y][posit.x] = "*"
-
-                second = x._top.item
-                first = x._top.next
-                x.pop()
-                x.pop()
-                x.push(first)
-                x.push(second)
-            
+            Bool = True
             state = False
             posit.x = m.ply.x
             posit.y = m.ply.y
 
 
-        print(x.peek())
+        print(x.peek(),x._top.next.item)
         time.sleep(0.2)
         # break
