@@ -7,12 +7,12 @@ class maze:
         self.maze = [
                     ["X", "X", "X", "X", "X", "X", "X"],
                     ["X", " ", " ", " ", "X", " ", "X"],
-                    ["X", " ", "X", " ", "X", " ", " "],
+                    ["X", " ", "X", "X", "X", " ", " "],
+                    ["X", " ", "X", " ", "X", " ", "X"],
                     ["X", " ", "X", " ", " ", " ", "X"],
-                    [" ", " ", "X", " ", "X", " ", "X"],
                     ["X", " ", "X", "X", "X", "X", "X"],
                     ]
-        self.ply = pos(5, 1)
+        self.ply = pos(5, 2)
         self.end = pos(2, 6)
         self.maze[self.ply.y][self.ply.x] = "P"
         self.maze[self.end.y][self.end.x] = "E"
